@@ -1,0 +1,252 @@
+
+<div class='container'> <!--fade-in-->
+<div class='panel panel-primary dialog-panel'>
+<div class='panel-heading'>
+  <h5>Angular Form Example</h5>
+</div>
+<div class='panel-body'>
+<form class='form-horizontal' role='form' name='userForm' ng-submit='submitForm()' novalidate>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='firstName'>Name {{userForm}}</label>
+  <div class='col-md-8'>
+    <div class='col-md-3 indent-small' ng-class="{ 'has-error' : userForm.firstName.$invalid && !userForm.firstName.$pristine }">
+      <div class='form-group internal'>
+        <input class='form-control' id='firstName' name="firstName" placeholder='First Name' type='text' ng-model="user.firstName">
+      </div>
+    </div>
+    <div class='col-md-3 indent-small'>
+      <div class='form-group internal'>
+        <input class='form-control' id='middleName' name="middleName" placeholder='Middle Name' type='text' ng-model="user.middleName">
+      </div>
+    </div>
+    <div class='col-md-3 indent-small'>
+      <div class='form-group internal'>
+        <input class='form-control' id='lastName' name="lastName" placeholder='Last Name' type='text' ng-model="user.lastName">
+      </div>
+    </div>
+  </div>
+  <p ng-show="userForm.firstName.$invalid && !userForm.firstName.$pristine" class="help-block">You name is required.</p>
+</div>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='fathersName'>Father's Name</label>
+  <div class='col-md-8'>
+    <div class='form-group'>
+      <div class='col-md-9'>
+        <input class='form-control' id='fathersName' name="fathersName" placeholder="Father's Full Name" type='text' ng-model="user.fathersName">
+      </div>
+    </div>
+  </div>
+</div>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='email'>Email Address</label>
+  <div class='col-md-8'>
+    <div class='form-group'>
+      <div class='col-md-9'>
+        <input class='form-control' id='email' name="email" placeholder='E-mail' type='text' ng-model="user.email">
+      </div>
+    </div>
+  </div>
+</div>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='phoneNumber'>Phone Number</label>
+  <div class='col-md-8'>
+    <div class='form-group'>
+      <div class='col-md-9'>
+        <input class='form-control' id='phoneNumber' name="phoneNumber" placeholder='Phone: (xxx) - xxx xxxx' type='text' ng-model="user.phoneNumber">
+      </div>
+    </div>
+  </div>
+</div>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='image'>Picture</label>
+  <div class='col-md-8'>
+    <div class='form-group'>
+      <div class='col-md-9'>
+        <input class='form-control' id='image' name="image" type='file' ng-model="user.image">
+      </div>
+    </div>
+  </div>
+</div>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='age'>Age</label>
+  <div class='col-md-8'>
+    <div class='col-md-1'>
+      <div class='form-group input-group'>
+        <input class='form-control' id='age' name="age" type="number" ng-model="user.age">
+      </div>
+    </div>
+    <label class='control-label col-md-2' for='bloodGroup'>Blood Group</label>
+    <div class='col-md-2'>
+      <div class='form-group input-group'>
+        <select name="bloodGroup" ng-model="user.bloodGroup" ng-options="id as value for (id, value) in bloodGroupOptions" class="form-control" required id='bloodGroup'>
+        </select>
+      </div>
+    </div>
+    <label class='control-label col-md-2 width-auto' for='maritalStatus'>Marital Status</label>
+    <div class='col-md-3'>
+      <div class='form-group input-group'>
+        <select name="maritalStatus" ng-model="user.maritalStatus" ng-options="id as value for (id, value) in maritalStatusOptions" class="form-control" required id='maritalStatus'>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class='control-label col-md-2 col-md-offset-2' for='dateOfBirth'>Date of Birth</label>
+  <div class="col-md-8">
+    <div class='col-md-3'>
+      <div class='form-group input-group'>
+        <input  name="dateOfBirth" class="form-control" ng-model="user.dateOfBirth" data-date-format="mm/dd/yyyy" bs-datepicker id='dateOfBirth' type="number">
+        <a class="btn btn-primary input-group-addon" data-toggle="datepicker"><i class="glyphicon glyphicon-calendar"></i></a>
+      </div>
+    </div>
+    <label class='control-label col-md-3' for='anniversaryDate'>Anniversary Date</label>
+    <div class='col-md-3'>
+      <div class='form-group input-group'>
+        <input  name="anniversaryDate" class="form-control" ng-model="user.anniversaryDate" data-date-format="mm/dd/yyyy" bs-datepicker id='anniversaryDate' type="number">
+        <a class="btn btn-primary input-group-addon" data-toggle="datepicker"><i class="glyphicon glyphicon-calendar"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+<fieldset>
+  <legend>Address</legend>
+  <div ng-repeat="address in user.addresses">
+    <div class='form-group'>
+      <label class='control-label col-md-2 col-md-offset-2' for='address1'>Address</label>
+      <div class='col-md-8'>
+        <div class='form-group'>
+          <div class='col-md-3'>
+            <select name="addressType" ng-model="address.addressType" ng-options="id as value for (id, value) in addressTypeOptions" class="form-control" required id='addressType'>
+            </select>
+          </div>
+          <div class='col-md-6'>
+            <input class='form-control' name="address1" id='address1' type='text' ng-model="address.address1">
+          </div>
+        </div>
+      </div>
+      <label class='control-label col-md-2 col-md-offset-2' for='address2'></label>
+      <div class='col-md-8'>
+        <div class='form-group'>
+          <div class='col-md-9'>
+            <input class='form-control' name="address2" id='address2' type='text' ng-model="address.address2">
+          </div>
+        </div>
+      </div>
+      <label class='control-label col-md-2 col-md-offset-2' for='city'>City</label>
+      <div class="col-md-8">
+        <div class='col-md-3'>
+          <div class='form-group input-group'>
+            <input name="city" class="form-control" ng-model="user.city" id='city' name="city" type="text">
+          </div>
+        </div>
+        <label class='control-label col-md-3' for='state'>State</label>
+        <div class='col-md-3'>
+          <div class='form-group input-group'>
+            <input name="state" class="form-control" ng-model="user.state" id='state' name="state" type="text">
+          </div>
+        </div>
+      </div>
+      <label class='control-label col-md-2 col-md-offset-2' for='country'>Country</label>
+      <div class="col-md-8">
+        <div class='col-md-3'>
+          <div class='form-group input-group'>
+            <input name="country" class="form-control" ng-model="user.country" id='country' name="country" type="text">
+          </div>
+        </div>
+        <label class='control-label col-md-3' for='pinCode'>Pin Code</label>
+        <div class='col-md-3'>
+          <div class='form-group input-group'>
+            <input name="pinCode" class="form-control" ng-model="user.pinCode" id='pinCode' name="pinCode" type="text">
+          </div>
+        </div>
+      </div>
+      <div class='form-group' ng-show="$index > 0">
+        <div class='col-md-offset-4 col-md-3'>
+          <button class='btn-lg btn-primary' type='button' ng-click='removeAddress($index);'>Remove this address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-md-offset-4 col-md-3'>
+      <button class='btn-lg btn-primary' type='button' ng-click='addNewAddress();' ng-disabled='user.addresses.length == 2'>Add more Address</button>
+    </div>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>Phone Numbers</legend>
+  <div ng-repeat="phoneNumber in user.morePhoneNumbers">
+    <div class='form-group'>
+      <label class='control-label col-md-2 col-md-offset-2' for='morePhoneNumber'>Phone Numbers</label>
+      <div class='col-md-8'>
+        <div class='form-group'>
+          <div class='col-md-3'>
+            <select name="messengerType" ng-model="phoneNumber.messengerType" ng-options="id as value for (id, value) in messengerTypeOptions" class="form-control" required id='messengerType'>
+            </select>
+          </div>
+          <div class='col-md-6'>
+            <input class='form-control' id='morePhoneNumber' name="morePhoneNumber" type='text' ng-model="phoneNumber.phoneNumber">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='form-group' ng-show="$index > 0">
+    <div class='col-md-offset-4 col-md-3'>
+      <button class='btn-lg btn-primary' type='button' ng-click='removeAddress($index);'>Remove this phone</button>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-md-offset-4 col-md-3'>
+      <button class='btn-lg btn-primary' type='button' ng-click='addNewPhoneNumber();'>Add more Phone Numbers</button>
+    </div>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>Social Media</legend>
+  <div ng-repeat="socialType in user.socialTypes">
+    <div class='form-group'>
+      <label class='control-label col-md-2 col-md-offset-2' for='socialValue'>Social</label>
+      <div class='col-md-8'>
+        <div class='form-group'>
+          <div class='col-md-3'>
+            <select name="socialType" ng-model="socialType.socialType" ng-options="id as value for (id, value) in socialTypeOptions" class="form-control" required id='socialType'>
+            </select>
+          </div>
+          <div class='col-md-6'>
+            <input class='form-control' id='socialValue' name="socialValue" type='text' ng-model="socialType.socialValue">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='form-group' ng-show="$index > 0">
+    <div class='col-md-offset-4 col-md-3'>
+      <button class='btn-lg btn-primary' type='button' ng-click='removeAddress($index);'>Remove this phone</button>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-md-offset-4 col-md-3'>
+      <button class='btn-lg btn-primary' type='button' ng-click='addNewSocialType();'>Add more Socials</button>
+    </div>
+  </div>
+</fieldset>
+<div class='form-group'>
+  <label class='control-label col-md-2 col-md-offset-2' for='hobbies'>Hobbies</label>
+  <div class='col-md-6'>
+    <textarea class='form-control' id='hobbies' name="hobbies" placeholder='Eg: Music, Cricket' rows='3' ng-model="user.hobbies"></textarea>
+  </div>
+</div>
+<div class='form-group'>
+  <div class='col-md-offset-4 col-md-3'>
+    <button class='btn-lg btn-primary' type='submit' ng-disabled='userForm.$invalid'>Submit</button>
+  </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+<!-- Notifications -->
+<div noty ng-repeat="n in notifications"/>
